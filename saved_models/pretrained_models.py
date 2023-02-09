@@ -19,6 +19,7 @@ PRETRAINED_MODELS: Dict[str, str] = {
     "193_british_library": dir_path / "193_british_library.pth",
     "063_135_140_177_composite_british_library": dir_path / "063_135_140_177_composite_british_library.pth",
     "composite_high_density": dir_path / "composite_high_density.pth",
+    "mondrian_high_density": dir_path / "mondrian_high_density.pth",
 }
 
 from pprint import pprint
