@@ -159,12 +159,15 @@ class StyleModelTrainer:
         from pathlib import Path
         dirn = Path(os.path.dirname(os.path.realpath(__file__))) 
         # optimizer state dict saved just in case
+        import os
+        from pathlib import Path
+        saved_models_path = Path(os.path.dirname(os.path.realpath(__file__))) / "saved_models"
         torch.save(
             {
                 "model_state_dict": self.transformation_model.state_dict(),
                 "optimizer_state_dict": self.optimizer.state_dict(),
             },
-            "saved_models/trained_model.pth",
+            saved_models_path / "trained_model.pth",
         )
 
 if __name__ == "__main__":
