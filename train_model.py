@@ -7,7 +7,6 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torch.utils.tensorboard import SummaryWriter
 from models import loss_models, transformation_models
-from utils import preprocess_image, preprocess_batch
 
 from argument_parsers import training_parser
 
@@ -159,8 +158,13 @@ class StyleModelTrainer:
         import os
         from pathlib import Path
         dirn = Path(os.path.dirname(os.path.realpath(__file__))) 
+        # optimizer state dict saved just in case
         torch.save(
-            self.transformation_model.state_dict(), dirn / "saved_models" / "trained_model.pth"
+            {
+                "model_state_dict": self.transformation_model.state_dict(),
+                "optimizer_state_dict": self.optimizer.state_dict(),
+            },
+            "saved_models/trained_model.pth",
         )
 
 if __name__ == "__main__":
@@ -185,6 +189,8 @@ if __name__ == "__main__":
     # loading the model and optimizer
     if args.checkpoint_path:
         checkpoint = torch.load(args.checkpoint_path)
+        # make sure the model has an optimizer state dict
+        assert "optimizer_state_dict" in checkpoint, "checkpoint doesn't have optimizer state dict"
         transformation_model.load_state_dict(checkpoint["model_state_dict"])
         optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
     
