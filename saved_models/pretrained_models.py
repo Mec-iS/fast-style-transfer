@@ -21,6 +21,7 @@ PRETRAINED_MODELS: Dict[str, str] = {
     "composite_high_density": dir_path / "composite_high_density.pth",
     "mondrian_high_density": dir_path / "mondrian_high_density.pth",
     "canaletto_canal": dir_path / "canaletto_canal_full.pth",
+    "budo_manga": dir_path / "budo-manga_chk.pth",
 }
     
 
